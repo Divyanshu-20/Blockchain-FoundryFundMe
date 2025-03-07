@@ -1,66 +1,55 @@
-## Foundry
+Blockchain FundMe
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+A decentralized crowdfunding smart contract built with Solidity and Foundry.
 
-Foundry consists of:
+Overview
+This project implements a funding contract on the Ethereum blockchain that allows users to:
+Fund the contract with ETH (minimum of 5 USD equivalent)
+Convert between ETH and USD using Chainlink Price Feeds
+Withdraw funds (owner only)
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+Features
 
-## Documentation
+ETH to USD Conversion: Uses Chainlink Price Feeds to ensure minimum funding amounts
+Withdrawal Optimization: Includes both standard and gas-optimized withdrawal functions
+Access Control: Only the contract owner can withdraw funds
+Fallback Functions: Automatic handling of direct ETH transfers
 
-https://book.getfoundry.sh/
+Getting Started
 
-## Usage
+Prerequisites
+Foundry
+Git
 
-### Build
+Installation
+Clone the repository
+Copy: git clone https://github.com/Divyanshu-20/Blockchain_FundMe.git
+cd Blockchain_FundMe
 
-```shell
-$ forge build
-```
+Install dependencies
 
-### Test
+forge install
+Build the project
+forge build
 
-```shell
-$ forge test
-```
+Usage:
 
-### Format
+Deploying
 
-```shell
-$ forge fmt
-```
+Deploy to a local Anvil chain:
+forge script script/DeployFundMe.s.sol --rpc-url http://localhost:8545 --private-key <your-private-key> --broadcast
 
-### Gas Snapshots
+Interacting with the Contract:
+Fund the contract
+cast send <CONTRACT_ADDRESS> "fund()" --value 0.1ether --rpc-url <RPC_URL> --private-key <PRIVATE_KEY>
+Withdraw (owner only):
+cast send <CONTRACT_ADDRESS> "withdraw()" --rpc-url <RPC_URL> --private-key <PRIVATE_KEY>
 
-```shell
-$ forge snapshot
-```
+Testing:
+Run the test suite:
+forge test
+Run with verbosity for more details:
+forge test -vv
 
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+License:
+This project is licensed under the MIT License.
